@@ -10,6 +10,14 @@ Everything runs in Docker through [`just`](https://just.systems). Don't use the 
 - `just artisan <args>`, `just composer <args>`, `just test [--filter=...]`, `just shell`
 - `just up` / `just down` serve the app at http://localhost:8000 (`APP_PORT` in `.env`)
 
+## Structure
+
+`app/` (namespace `Fonid\`) is split into layers:
+
+- `Domain/`: the business domain. No dependency on HTTP or the outside layers. Fonid assumes the data exists and may be used; where it comes from is not the domain's concern. The domain declares what data it needs as contracts, and the source is plugged in from outside. Each country has its own folder (e.g. `Domain/Brazil/`).
+- `Interface/`: the output layer, how the domain is exposed. Each country has its own folder under `Interface/Http/Api/`, versioned independently (e.g. `Interface/Http/Api/Brazil/V1/` serves `/api/br/v1/`). See `202611241726-organize-the-domain-and-the-api-by-country`.
+- `Providers/`: Laravel service providers (framework wiring).
+
 ## Before finishing a task
 
 Run `just check`. It runs Mago format check, Mago lint, PHPStan and PHPUnit, the same as CI, and it must pass. `just fmt` applies Mago's auto-fixes and formats.

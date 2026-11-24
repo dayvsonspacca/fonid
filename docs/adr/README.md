@@ -47,3 +47,4 @@ Regenerate this table from the files rather than editing it by hand:
 | Date | Decision | Status |
 | --- | --- | --- |
 | 2026-11-24 | [Record architecture decisions with ADRs](./202611241705-record-architecture-decisions-with-adrs.md) | Accepted |
+| 2026-11-24 | [Organize the domain and the API by country](./202611241726-organize-the-domain-and-the-api-by-country.md) | Accepted |
