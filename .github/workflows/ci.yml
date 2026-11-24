@@ -10,6 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          # The ADR check compares a pull request against its base (HEAD^1).
+          fetch-depth: 2
+
+      - name: ADR check
+        run: |
+          if [ "${{ github.event_name }}" = pull_request ]; then
+            bash scripts/adr.sh --base HEAD^1
+          else
+            bash scripts/adr.sh
+          fi
 
       - uses: taiki-e/install-action@v2
         with:
