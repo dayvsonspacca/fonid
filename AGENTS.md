@@ -14,7 +14,7 @@ Everything runs in Docker through [`just`](https://just.systems). Don't use the 
 
 `app/` (namespace `Fonid\`) is split into layers:
 
-- `Domain/`: the business domain. No dependency on HTTP or the outside layers. Fonid assumes the data exists and may be used; where it comes from is not the domain's concern. The domain declares what data it needs as contracts, and the source is plugged in from outside. Each country has its own folder (e.g. `Domain/Brazil/`).
+- `Domain/`: the business domain. No dependency on HTTP or the outside layers. Fonid assumes the data exists and may be used; where it comes from is not the domain's concern. The domain declares what data it needs as contracts, and the source is plugged in from outside. Each country has its own folder (e.g. `Domain/Brazil/`); `Domain/Shared/` holds what applies to every country.
 - `Interface/`: the output layer, how the domain is exposed. Each country has its own folder under `Interface/Http/Api/`, versioned independently (e.g. `Interface/Http/Api/Brazil/V1/` serves `/api/br/v1/`). See `202611241726-organize-the-domain-and-the-api-by-country`.
 - `Providers/`: Laravel service providers (framework wiring).
 
@@ -28,6 +28,7 @@ Run `just check`. It runs Mago format check, Mago lint, PHPStan and PHPUnit, the
 - Don't hand-format; run `just fmt`.
 - Classes are `final` unless they're designed for extension.
 - PHPStan runs at level max (Larastan). Fix the types instead of lowering the level or adding ignores and baseline entries; ask first if there's truly no way around it.
+- Value objects holding personal data (identifiers, phone numbers) extend `Fonid\Domain\Shared\PersonalData` and never convert to string or JSON. See `202611241754-allow-personal-data-out-only-through-explicit-calls`.
 - Tests are PHPUnit classes with `#[Test]` attributes, in `tests/Unit` and `tests/Feature`.
 - Generate classes with `just artisan make:*`. `stubs/` customizes its output to follow these conventions; keep it that way when editing a stub.
 - `config/` holds only the keys that differ from the framework defaults (Laravel merges them over `vendor/laravel/framework/config/`). To change config, add a file with just those keys rather than publishing the full file.

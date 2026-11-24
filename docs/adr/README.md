@@ -48,3 +48,4 @@ Regenerate this table from the files rather than editing it by hand:
 | --- | --- | --- |
 | 2026-11-24 | [Record architecture decisions with ADRs](./202611241705-record-architecture-decisions-with-adrs.md) | Accepted |
 | 2026-11-24 | [Organize the domain and the API by country](./202611241726-organize-the-domain-and-the-api-by-country.md) | Accepted |
+| 2026-11-24 | [Allow personal data out only through explicit calls](./202611241754-allow-personal-data-out-only-through-explicit-calls.md) | Accepted |
