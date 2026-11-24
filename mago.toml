@@ -9,3 +9,11 @@ preset = "pint"
 
 [linter]
 integrations = ["laravel", "phpunit"]
+
+# Identifiers hold personal data, so they must extend the base that blocks
+# implicit output. See docs/adr/202611241754-allow-personal-data-out-only-through-explicit-calls.md
+[[guard.structural.rules]]
+on = "Fonid\\Domain\\*\\ValueObjects\\Identifiers\\**"
+target = "class"
+must-extend = "Fonid\\Domain\\Shared\\PersonalData"
+reason = "Identifiers hold personal data and must extend Fonid\\Domain\\Shared\\PersonalData."

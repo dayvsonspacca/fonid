@@ -1,6 +1,9 @@
 includes:
     - vendor/larastan/larastan/extension.neon
 
+rules:
+    - Tests\PHPStan\PersonalDataMustNotLeakRule
+
 parameters:
     level: max
     paths:
@@ -12,3 +15,5 @@ parameters:
         - tests
     excludePaths:
         - bootstrap/cache
+        # Fixture for the rule's own test: breaks the rule on purpose.
+        - tests/Unit/PHPStan/data

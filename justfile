@@ -55,6 +55,10 @@ fmt:
 lint:
     {{ run }} composer lint
 
-# Format check + lint + analyse + test (same as CI)
+# Architectural rules with Mago guard
+guard:
+    {{ run }} composer guard
+
+# Format check + lint + guard + analyse + test (same as CI)
 check:
     {{ run }} composer check

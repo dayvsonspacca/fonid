@@ -44,9 +44,11 @@
             "mago format"
         ],
         "lint": "mago lint",
+        "guard": "mago guard --structural",
         "check": [
             "mago format --check",
             "@lint",
+            "@guard",
             "@analyse",
             "@test"
         ],

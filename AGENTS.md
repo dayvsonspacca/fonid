@@ -20,7 +20,7 @@ Everything runs in Docker through [`just`](https://just.systems). Don't use the 
 
 ## Before finishing a task
 
-Run `just check`. It runs Mago format check, Mago lint, PHPStan and PHPUnit, the same as CI, and it must pass. `just fmt` applies Mago's auto-fixes and formats.
+Run `just check`. It runs Mago format check, Mago lint, Mago guard, PHPStan and PHPUnit, the same as CI, and it must pass. `just fmt` applies Mago's auto-fixes and formats.
 
 ## Conventions
 
