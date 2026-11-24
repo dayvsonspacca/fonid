@@ -23,6 +23,8 @@
         </include>
     </source>
     <php>
+        <!-- Keep arguments in stack traces, so tests can check that personal data is redacted from them. -->
+        <ini name="zend.exception_ignore_args" value="0"/>
         <env name="APP_ENV" value="testing"/>
         <env name="APP_MAINTENANCE_DRIVER" value="file"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
