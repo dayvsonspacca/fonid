@@ -43,13 +43,17 @@ artisan *args:
 test *args:
     {{ run }} composer test -- {{ args }}
 
-# PHPStan (Larastan, level max)
-analyse:
-    {{ run }} composer analyse
+# PHPStan (Larastan, level max), e.g. `just analyse app/Domain`
+analyse *args:
+    {{ run }} composer analyse -- {{ args }}
 
 # Apply Mago's auto-fixes, then format
 fmt:
     {{ run }} composer fmt
+
+# Format PHP read from stdin and write it to stdout (editor format on save)
+fmt-stdin:
+    @docker compose run --rm --no-deps -T php vendor/bin/mago format --stdin-input
 
 # Lint with Mago
 lint:
