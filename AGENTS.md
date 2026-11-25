@@ -18,6 +18,8 @@ Everything runs in Docker through [`just`](https://just.systems). Don't use the 
 - `Interface/`: the output layer, how the domain is exposed. Each country has its own folder under `Interface/Http/Api/`, versioned independently (e.g. `Interface/Http/Api/Brazil/V1/` serves `/api/br/v1/`). See `202611241726-organize-the-domain-and-the-api-by-country`.
 - `Providers/`: Laravel service providers (framework wiring).
 
+`analysis/` (namespace `Fonid\Analysis\`, dev-only autoload) holds the static analysis extensions that enforce rules about the code, organized by the rule's subject (e.g. `analysis/PersonalData/`). They are not tests: their tests live in `tests/Architecture/`.
+
 ## Before finishing a task
 
 Run `just check`. It runs Mago format check, Mago lint, Mago guard, PHPStan and PHPUnit, the same as CI, and it must pass. `just fmt` applies Mago's auto-fixes and formats.
@@ -29,7 +31,7 @@ Run `just check`. It runs Mago format check, Mago lint, Mago guard, PHPStan and 
 - Classes are `final` unless they're designed for extension.
 - PHPStan runs at level max (Larastan). Fix the types instead of lowering the level or adding ignores and baseline entries; ask first if there's truly no way around it.
 - Value objects holding personal data (identifiers, phone numbers) extend `Fonid\Domain\Shared\PersonalData` and never convert to string or JSON. See `202611241754-allow-personal-data-out-only-through-explicit-calls`.
-- Tests are PHPUnit classes with `#[Test]` attributes, in `tests/Unit` and `tests/Feature`.
+- Tests are PHPUnit classes with `#[Test]` attributes, in `tests/Unit`, `tests/Feature` and `tests/Architecture`. Architecture tests guard rules about the code's structure (e.g. personal data cannot leak), named after the rule, not the tool that enforces it.
 - Generate classes with `just artisan make:*`. `stubs/` customizes its output to follow these conventions; keep it that way when editing a stub.
 - `config/` holds only the keys that differ from the framework defaults (Laravel merges them over `vendor/laravel/framework/config/`). To change config, add a file with just those keys rather than publishing the full file.
 - There is no frontend build (no Vite or npm). Don't add one unless asked.

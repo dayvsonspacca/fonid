@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\PHPStan;
+namespace Fonid\Analysis\PersonalData;
 
 use Fonid\Domain\Shared\PersonalData;
 use JsonSerializable;

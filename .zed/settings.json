@@ -41,7 +41,7 @@
               "**/storage/**",
               "**/.phpunit.cache/**",
               // Fixtures that break the PHPStan rule on purpose.
-              "**/tests/Unit/PHPStan/data/**"
+              "**/tests/Architecture/PersonalData/Fixtures/**"
             ]
           }
         }

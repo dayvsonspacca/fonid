@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\PHPStan\Data;
+namespace Tests\Architecture\PersonalData\Fixtures;
 
 use Fonid\Domain\Shared\PersonalData;
 
-final readonly class ConvertsToJson extends PersonalData implements \JsonSerializable
+final readonly class ConvertsToString extends PersonalData
 {
     public function __construct(
         private string $value,
@@ -17,7 +17,7 @@ final readonly class ConvertsToJson extends PersonalData implements \JsonSeriali
         return '***';
     }
 
-    public function jsonSerialize(): string
+    public function __toString(): string
     {
         return $this->value;
     }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\PHPStan\Data;
+namespace Tests\Architecture\PersonalData\Fixtures;
 
 use Fonid\Domain\Shared\PersonalData;
 
