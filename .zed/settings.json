@@ -11,8 +11,8 @@
       // Mago (pint preset) inside the container, the same formatter as `just fmt`.
       "formatter": {
         "external": {
-          "command": "docker",
-          "arguments": ["compose", "run", "--rm", "--no-deps", "-T", "php", "vendor/bin/mago", "format", "--stdin-input"]
+          "command": "just",
+          "arguments": ["fmt-stdin"]
         }
       },
       "format_on_save": "on",

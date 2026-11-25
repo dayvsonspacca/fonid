@@ -30,8 +30,8 @@
     "command": "just analyse"
   },
   {
-    "label": "phpstan analyse $ZED_RELATIVE_FILE",
-    "command": "docker compose run --rm --no-deps php vendor/bin/phpstan analyse --memory-limit=1G \"$ZED_RELATIVE_FILE\"",
+    "label": "just analyse $ZED_RELATIVE_FILE",
+    "command": "just analyse \"$ZED_RELATIVE_FILE\"",
     "tags": ["php"]
   },
   {
