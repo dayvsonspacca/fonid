@@ -1,0 +1,67 @@
+// Project tasks for Zed (`task: spawn`, or the ▶ in the gutter).
+//
+// Everything goes through `just`, which runs inside Docker. Paths use
+// $ZED_RELATIVE_FILE because the container sees the project at /var/www/html,
+// not at the host path.
+[
+  {
+    "label": "just check",
+    "command": "just check",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "just fmt",
+    "command": "just fmt",
+    "reveal": "no_focus",
+    "hide": "on_success"
+  },
+  {
+    "label": "just lint",
+    "command": "just lint"
+  },
+  {
+    "label": "just guard",
+    "command": "just guard"
+  },
+  {
+    "label": "just analyse",
+    "command": "just analyse"
+  },
+  {
+    "label": "phpstan analyse $ZED_RELATIVE_FILE",
+    "command": "docker compose run --rm --no-deps php vendor/bin/phpstan analyse --memory-limit=1G \"$ZED_RELATIVE_FILE\"",
+    "tags": ["php"]
+  },
+  {
+    "label": "just test",
+    "command": "just test",
+    "tags": ["phpunit-test"]
+  },
+  {
+    "label": "just test $ZED_RELATIVE_FILE",
+    "command": "just test \"$ZED_RELATIVE_FILE\"",
+    "tags": ["phpunit-test"]
+  },
+  {
+    "label": "just test --filter=$ZED_SYMBOL",
+    "command": "just test --filter=\"$ZED_SYMBOL\" \"$ZED_RELATIVE_FILE\"",
+    "tags": ["phpunit-test"]
+  },
+  {
+    "label": "just up",
+    "command": "just up",
+    "hide": "on_success"
+  },
+  {
+    "label": "just down",
+    "command": "just down",
+    "hide": "on_success"
+  },
+  {
+    "label": "just shell",
+    "command": "just shell",
+    "use_new_terminal": true
+  }
+]
