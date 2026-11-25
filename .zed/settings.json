@@ -1,0 +1,51 @@
+// Project settings for Zed. Merged over the user's ~/.config/zed/settings.json.
+//
+// PHP tooling runs in Docker (see AGENTS.md): the host PHP may differ from the
+// project's 8.6, so nothing here calls the host `php`.
+{
+  "languages": {
+    "PHP": {
+      // Intelephense runs on Node and doesn't need PHP on the host. Phpactor
+      // would run on the host PHP, so it stays off.
+      "language_servers": ["intelephense", "!phpactor", "!phpantom", "!phptools", "..."],
+      // Mago (pint preset) inside the container, the same formatter as `just fmt`.
+      "formatter": {
+        "external": {
+          "command": "docker",
+          "arguments": ["compose", "run", "--rm", "--no-deps", "-T", "php", "vendor/bin/mago", "format", "--stdin-input"]
+        }
+      },
+      "format_on_save": "on",
+      "tab_size": 4,
+      "hard_tabs": false,
+      "wrap_guides": [120]
+    }
+  },
+
+  "lsp": {
+    "intelephense": {
+      "settings": {
+        "intelephense": {
+          "environment": {
+            "phpVersion": "8.6.0"
+          },
+          // Mago owns formatting.
+          "format": {
+            "enable": false
+          },
+          "files": {
+            "exclude": [
+              "**/.git/**",
+              "**/node_modules/**",
+              "**/bootstrap/cache/**",
+              "**/storage/**",
+              "**/.phpunit.cache/**",
+              // Fixtures that break the PHPStan rule on purpose.
+              "**/tests/Unit/PHPStan/data/**"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
